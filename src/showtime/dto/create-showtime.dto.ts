@@ -1,1 +1,12 @@
-export class CreateShowtimeDto {}
+import { IsDateString, IsInt } from 'class-validator';
+
+export class CreateShowtimeDto {
+  @IsDateString()
+  startTime: string;
+
+  @IsInt()
+  movieId: number;
+
+  @IsInt()
+  roomId: number;
+}

@@ -2,25 +2,16 @@ import { Showtime } from "src/showtime/entities/showtime.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
-export class Movie {
+export class Room {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  name: string;
 
   @Column()
-  description: string;
+  totalSeats: number;
 
-  @Column()
-  durationMinutes: number;
-
-  @Column()
-  genre: string;
-
-  @Column({ nullable: true })
-  imageUrl: string;
-
-  @OneToMany(() => Showtime, showtime => showtime.movie)
+  @OneToMany(() => Showtime, showtime => showtime.room)
   showtimes: Showtime[];
 }
