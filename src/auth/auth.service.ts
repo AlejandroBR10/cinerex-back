@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+
+import { User } from './entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import * as  bcrypt from "bcrypt";
+import { JwtService } from '@nestjs/jwt';
+import { LoginUserDto } from './dto/login-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    @InjectRepository(User)
+          private userRepository: Repository<User>,
+          private  jwtService: JwtService
+  ){}
+
+  async registerUser(createUserDto: CreateUserDto){
+    createUserDto.userPassword = bcrypt.hashSync(createUserDto.userPassword , 5)
+      const user = this.userRepository.save(createUserDto);
+      return user;
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async loginUser(loginUserDto : LoginUserDto){
+    const user = await this.userRepository.findOne({
+      where: {
+        userEmail: loginUserDto.userEmail
+      },
+    });
+    
+    if(!user) throw new UnauthorizedException("No estas autorizado");
+    
+    const match = await bcrypt.compare(loginUserDto.userPassword, user.userPassword);
+   
+    if(!match)throw new UnauthorizedException("No estas autorizado");
+      const payload = {
+        userEmail : user.userEmail,
+        userPassword : user.userPassword,
+        userRoles: user.userRoles
+    };
+    const token = this.jwtService.sign(payload);
+    console.log(token);
+    return token;
+  } 
+
+  async updateUser(email: string, updateUserDto: UpdateUserDto){    
+   const newUserData =  await this.userRepository.preload({
+      userId: email, 
+      ...updateUserDto
+    })
+    if(!newUserData){
+      throw new NotFoundException("No se encontro el usuario");
+    }
+    this.userRepository.save(newUserData);
+    return newUserData;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
 }

@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
 import { ShowtimeModule } from './showtime/showtime.module';
 import { SeatModule } from './seat/seat.module';
@@ -8,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { TicketModule } from './ticket/ticket.module';
 import { RoomModule } from './room/room.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -22,8 +22,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         autoLoadEntities: true,
         synchronize: true,
       }),
-    
-    UserModule, AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule],
+    ConfigModule.forRoot(),
+ AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule],
   controllers: [],
   providers: [],
 })

@@ -1,6 +1,6 @@
+import { User } from "src/auth/entities/user.entity";
 import { Seat } from "src/seat/entities/seat.entity";
 import { Showtime } from "src/showtime/entities/showtime.entity";
-import { User } from "src/user/entities/user.entity";
 import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, Column } from "typeorm";
 
 @Entity()
