@@ -5,8 +5,8 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToOne, JoinColumn, Column
 
 @Entity()
 export class Ticket {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @ManyToOne(() => User, user => user.tickets)
   user: User;
