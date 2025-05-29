@@ -1,24 +1,25 @@
+import { IsUUID } from "class-validator";
 import { Showtime } from "src/showtime/entities/showtime.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
+
 @Entity()
 export class Movie {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+  @Column("text")
   title: string;
 
-  @Column()
+  @Column("text")
   description: string;
 
-  @Column()
+  @Column("number")
   durationMinutes: number;
 
-  @Column()
+  @Column("text")
   genre: string;
 
-  @Column({ nullable: true })
+  @Column("text")
   imageUrl: string;
 
   @OneToMany(() => Showtime, showtime => showtime.movie)

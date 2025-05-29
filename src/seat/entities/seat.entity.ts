@@ -5,9 +5,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from "typ
 @Entity()
 export class Seat {
   @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+  @Column("text")
   seatNumber: string; // Ej: A1, B2
 
   @ManyToOne(() => Showtime, showtime => showtime.seats)

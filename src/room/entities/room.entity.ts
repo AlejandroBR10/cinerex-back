@@ -1,15 +1,16 @@
+import { UUID } from "crypto";
 import { Showtime } from "src/showtime/entities/showtime.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Room {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-  @Column()
+  @Column("text")
   name: string;
 
-  @Column()
+  @Column("number")
   totalSeats: number;
 
   @OneToMany(() => Showtime, showtime => showtime.room)
