@@ -19,16 +19,16 @@ export class ShowtimeController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.showtimeService.findOne(+id);
+    return this.showtimeService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateShowtimeDto: UpdateShowtimeDto) {
-    return this.showtimeService.update(+id, updateShowtimeDto);
+    return this.showtimeService.update(id, updateShowtimeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.showtimeService.remove(+id);
+    return this.showtimeService.remove(id);
   }
 }

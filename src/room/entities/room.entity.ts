@@ -10,7 +10,7 @@ export class Room {
   @Column("text")
   name: string;
 
-  @Column("number")
+  @Column()
   totalSeats: number;
 
   @OneToMany(() => Showtime, showtime => showtime.room)

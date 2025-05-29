@@ -13,7 +13,7 @@ export class Movie {
   @Column("text")
   description: string;
 
-  @Column("number")
+  @Column()
   durationMinutes: number;
 
   @Column("text")

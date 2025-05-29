@@ -6,7 +6,7 @@ import { Showtime } from './entities/showtime.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class showtimeRepository {
+export class ShowtimeService {
   constructor(
     @InjectRepository(Showtime)
     private showtimeRepository: Repository<Showtime> 
