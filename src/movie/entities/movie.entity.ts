@@ -6,21 +6,21 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 @Entity()
 export class Movie {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  movieId: string;
   @Column("text")
-  title: string;
+  movieTitle: string;
 
   @Column("text")
-  description: string;
+  movieDescription: string;
 
   @Column()
-  durationMinutes: number;
+  movieDurationMinutes: number;
 
   @Column("text")
-  genre: string;
+  movieGenre: string;
 
   @Column("text")
-  imageUrl: string;
+  movieImageUrl: string;
 
   @OneToMany(() => Showtime, showtime => showtime.movie)
   showtimes: Showtime[];

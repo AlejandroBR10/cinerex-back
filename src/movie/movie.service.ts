@@ -12,24 +12,34 @@ export class MovieService {
     private movieRepository: Repository<Movie>
   ){}
   create(createMovieDto: CreateMovieDto) {
-    return this.movieRepository.save(createMovieDto)
+    const movie =  this.movieRepository.save(createMovieDto);
+    return movie;
   }
 
   findAll() {
-    return this.movieRepository.find();
+    return this.movieRepository.find({
+      relations : {
+        showtimes : true
+      }
+    });
   }
 
   findOne(id: string) {
-    const movie = this.movieRepository.findOneBy({
-      id: id,
-    })
+    const movie = this.movieRepository.findOne({
+      where  :{
+        movieId : id
+      }, 
+      relations : {
+        showtimes : true
+      }
+    });
     if(!movie) throw new NotFoundException("No movie found");
     return movie;
   }
 
   async update(id: string, updateMovieDto: UpdateMovieDto) {
     const movieToUpdate = await this.movieRepository.preload({
-      id: id,
+      movieId: id,
       ...updateMovieDto
     })
     if(!movieToUpdate){
@@ -39,12 +49,11 @@ export class MovieService {
   }
 
   async remove(id: string) {
-    const movieToRemove = await this.movieRepository.findOneBy({
-      id: id,
-    });
-    if(!movieToRemove){
-      throw new NotFoundException(`Movie con el id: ${id} no ha sido encontrado`);
-    }
-    return this.movieRepository.remove(movieToRemove);
+   this.findOne(id);
+   this.movieRepository.delete({
+    movieId : id
+   })
+    
+    return `Movie con el id-> #${id} eliminado`;
   }
 }

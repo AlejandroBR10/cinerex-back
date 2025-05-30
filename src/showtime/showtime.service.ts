@@ -12,16 +12,29 @@ export class ShowtimeService {
     private showtimeRepository: Repository<Showtime> 
   ){}
   create(createShowtimeDto: CreateShowtimeDto) {
-    return this.showtimeRepository.save(createShowtimeDto);
+    const showTime = this.showtimeRepository.save(createShowtimeDto);
+    return showTime;
   }
 
   findAll() {
-    return this.showtimeRepository.find();
+    return this.showtimeRepository.find({
+      relations : {
+        movie  : true,
+        room : true
+      }
+    }
+    );
   }
 
   findOne(id: string) {
-    const showtime = this.showtimeRepository.findOneBy({
-      id: id,
+    const showtime = this.showtimeRepository.findOne({
+      where : {
+        id: id,
+      }, relations : {
+        movie  :true,
+        room :true
+      }
+      
     })
     if(!showtime) throw new NotFoundException(`Showtime con el id: ${id} no encontrado`)
     return showtime;
@@ -32,14 +45,16 @@ export class ShowtimeService {
       id: id,
       ...updateShowtimeDto
     })
-    if(!showToUpdate) throw new BadRequestException();
+    if(!showToUpdate) throw new NotFoundException();
+    this.showtimeRepository.save(showToUpdate);
+    return showToUpdate;
   }
 
   async remove(id: string) {
-    const showToRemove = await this.showtimeRepository.findOneBy({
-      id: id,
-    })
-    if(!showToRemove) throw new NotFoundException(`show con el id: ${id} no encontrado`);
-    return this.showtimeRepository.remove(showToRemove);
-  }
+   this.findOne(id);
+   this.showtimeRepository.delete({
+    id : id
+   });
+     return `ShowTime con el id-> #${id} eliminado`;
+}
 }
