@@ -1,6 +1,7 @@
 # Ignorar carpeta de datos de Postgres
-/postgres
-
+/postgres/
+postgres-data/
+pgdata/
 # compiled output
 /dist
 /node_modules
