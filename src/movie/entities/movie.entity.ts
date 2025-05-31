@@ -19,10 +19,10 @@ export class Movie {
   @Column("text")
   movieGenre: string;
 
-  @Column("text")
+  @Column({type:"text", nullable: true})
   movieImageUrl: string;
 
-  @Column("text")
+  @Column({type:"text", nullable: true})
   movieTrailer : string;
 
   @OneToMany(() => Showtime, showtime => showtime.movie)
