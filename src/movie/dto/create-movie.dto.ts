@@ -14,7 +14,7 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsString()
-  @MaxLength(240)
+  @MaxLength(1000)
   movieDescription: string;
 
   @ApiProperty()
@@ -29,8 +29,12 @@ export class CreateMovieDto {
 @ApiProperty()
   @IsString()
   @IsOptional()
-  @MaxLength(500)
   movieImageUrl: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  movieTrailer: string;
 
   @ApiProperty()
   @IsOptional()

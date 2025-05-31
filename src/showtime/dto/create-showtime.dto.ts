@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsDecimal, IsInt, IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsDateString, IsDecimal, IsIn, IsInt, IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 import { Movie } from 'src/movie/entities/movie.entity';
 import { Room } from 'src/room/entities/room.entity';
 
@@ -20,7 +20,13 @@ export class CreateShowtimeDto {
    @ApiProperty()
    @IsNumber()
   remainingSeats: number;
- 
+
+   @ApiProperty({ enum: ['ingles', 'subtitulado', 'español'] })
+  @IsString()
+  @IsIn(['ingles', 'subtitulado', 'español'])
+  lenguage: string;
+
+
      @ApiProperty()
      @IsOptional()
     @IsUUID("4")

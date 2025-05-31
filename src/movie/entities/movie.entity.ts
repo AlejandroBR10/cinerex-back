@@ -22,6 +22,9 @@ export class Movie {
   @Column("text")
   movieImageUrl: string;
 
+  @Column("text")
+  movieTrailer : string;
+
   @OneToMany(() => Showtime, showtime => showtime.movie)
   showtimes: Showtime[];
 }

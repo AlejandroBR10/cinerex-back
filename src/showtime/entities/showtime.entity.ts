@@ -19,6 +19,9 @@ export class Showtime {
     @Column()
   remainingSeats: number;
 
+  @Column('text')
+  lenguage : string;
+
    @ManyToOne(() => Movie, movie => movie.showtimes, { eager: true })
   @JoinColumn({ name: 'movieId' })
   movie: Movie | string;
