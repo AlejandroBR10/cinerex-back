@@ -31,7 +31,7 @@ export class CreateMovieDto {
 @ApiProperty()
   @IsString()
   @IsOptional()
-  @MaxLength(30)
+  @MaxLength(500)
   movieImageUrl: string;
 
   @ApiProperty()
