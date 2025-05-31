@@ -4,11 +4,9 @@ import { Showtime } from 'src/showtime/entities/showtime.entity';
 
 export class CreateMovieDto {
   @ApiProperty()
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  @IsUUID("4")
-  @MaxLength(30)
-  movieId: string;
+  movieId: number;
  @ApiProperty()
   @IsString()
   @MaxLength(50)

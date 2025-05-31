@@ -24,7 +24,7 @@ export class MovieService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     const movie = this.movieRepository.findOne({
       where  :{
         movieId : id
@@ -37,7 +37,7 @@ export class MovieService {
     return movie;
   }
 
-  async update(id: string, updateMovieDto: UpdateMovieDto) {
+  async update(id: number, updateMovieDto: UpdateMovieDto) {
     const movieToUpdate = await this.movieRepository.preload({
       movieId: id,
       ...updateMovieDto
@@ -48,7 +48,7 @@ export class MovieService {
     return this.movieRepository.save(movieToUpdate);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
    this.findOne(id);
    this.movieRepository.delete({
     movieId : id

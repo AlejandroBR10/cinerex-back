@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, ParseIntPipe } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
@@ -24,17 +24,20 @@ export class MovieController {
   }
  @Auth()
   @Get(':id')
-  findOne(@Param('id',  new ParseUUIDPipe({ version: "4" })) id: string) {
-    return this.movieService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.movieService.findOne(+id);
   }
  @Auth()
   @Patch(':id')
-  update(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string, @Body() updateMovieDto: UpdateMovieDto) {
-    return this.movieService.update(id, updateMovieDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMovieDto: UpdateMovieDto
+  ) {
+    return this.movieService.update(+id, updateMovieDto);
   }
  @Auth()
   @Delete(':id')
-  remove(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string) {
-    return this.movieService.remove(id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.movieService.remove(+id);
   }
 }
