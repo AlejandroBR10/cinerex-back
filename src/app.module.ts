@@ -8,6 +8,8 @@ import { TicketModule } from './ticket/ticket.module';
 import { RoomModule } from './room/room.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { CustomersModule } from './customers/customers.module';
+import { ReservationModule } from './reservation/reservation.module';
 
 @Module({
   imports: [
@@ -20,10 +22,10 @@ import { ConfigModule } from '@nestjs/config';
         database: process.env.name,
         entities: [],
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: true ,
       }),
     ConfigModule.forRoot(),
- AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule],
+ AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule, CustomersModule, ReservationModule],
   controllers: [],
   providers: [],
 })

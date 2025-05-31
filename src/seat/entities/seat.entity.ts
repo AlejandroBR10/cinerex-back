@@ -1,18 +1,22 @@
+import { Room } from "src/room/entities/room.entity";
 import { Showtime } from "src/showtime/entities/showtime.entity";
 import { Ticket } from "src/ticket/entities/ticket.entity";
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+//@Entity()
 export class Seat {
-  @PrimaryColumn()
-  seatNumber: string; // Ej: A1, B2
+ /* @PrimaryGeneratedColumn("uuid")
+  seatId: string; // Ej: A1, B2
 
-  @ManyToOne(() => Showtime, showtime => showtime.seats)
-  showtime: Showtime;
+   @Column('text')
+  seatNumber: string;
 
-  @Column({ default: false })
-  isReserved: boolean;
+  @ManyToOne(() => Room, room => room.seats)
+  room: Room;*/
 
-  @OneToOne(() => Ticket, ticket => ticket.seat, { nullable: true })
-  ticket: Ticket;
+
+  //Esta comentada para evitar problemas al hacr peticiones al Postman
+  //Si quieren usarla solo descomentenla y tambien descomenten las relaciones 
+  // que existen en las demas tablas
+
 }

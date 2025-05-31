@@ -12,11 +12,17 @@ export class TicketService {
     private ticketRepository: Repository<Ticket>
   ) { }
   create(createTicketDto: CreateTicketDto) {
-    return this.ticketRepository.save(createTicketDto);
+    const ticket = this.ticketRepository.save(createTicketDto);
+    return ticket;
   }
 
   findAll() {
-    return this.ticketRepository.find();
+    return this.ticketRepository.find({
+      relations : {
+        showtime : true,
+        customer :true
+      }
+    });
   }
 
   findOne(id: string) {

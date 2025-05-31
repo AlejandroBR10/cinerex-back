@@ -1,19 +1,40 @@
-import { IsString, IsInt, IsOptional } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsInt, IsOptional, MaxLength, IsNumber, IsUUID } from 'class-validator';
+import { Showtime } from 'src/showtime/entities/showtime.entity';
 
 export class CreateMovieDto {
+  @ApiProperty()
   @IsString()
-  title: string;
-
-  @IsString()
-  description: string;
-
-  @IsInt()
-  durationMinutes: number;
-
-  @IsString()
-  genre: string;
-
   @IsOptional()
+  @IsUUID("4")
+  @MaxLength(30)
+  movieId: string;
+ @ApiProperty()
   @IsString()
-  imageUrl?: string;
+  @MaxLength(50)
+  movieTitle: string;
+
+  @ApiProperty()
+  @IsString()
+  @MaxLength(240)
+  movieDescription: string;
+
+  @ApiProperty()
+  @IsNumber()
+  movieDurationMinutes: number;
+
+ @ApiProperty()
+  @IsString()
+  @MaxLength(30)
+  movieGenre: string;
+
+@ApiProperty()
+  @IsString()
+  @IsOptional()
+  @MaxLength(30)
+  movieImageUrl: string;
+
+  @ApiProperty()
+  @IsOptional()
+  showtimes: Showtime[];
 }

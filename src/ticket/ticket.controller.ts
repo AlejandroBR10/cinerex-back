@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { TicketService } from './ticket.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
+
+@ApiAuth()
+@ApiBearerAuth()
 @Controller('ticket')
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
-
+  @Auth()
   @Post()
   create(@Body() createTicketDto: CreateTicketDto) {
     return this.ticketService.create(createTicketDto);
   }
-
+  @Auth()
   @Get()
   findAll() {
     return this.ticketService.findAll();
   }
-
+  @Auth()
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.ticketService.findOne(id);
   }
-
+  @Auth()
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTicketDto: UpdateTicketDto) {
+  update(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string, @Body() updateTicketDto: UpdateTicketDto) {
     return this.ticketService.update(id, updateTicketDto);
   }
-
+  @Auth()
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.ticketService.remove(id);
   }
 }

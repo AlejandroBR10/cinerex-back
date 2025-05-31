@@ -3,9 +3,10 @@ import { RoomService } from './room.service';
 import { RoomController } from './room.controller';
 import { Room } from './entities/room.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Room])],
+    imports: [TypeOrmModule.forFeature([Room]), AuthModule],
   controllers: [RoomController],
   providers: [RoomService],
 })
