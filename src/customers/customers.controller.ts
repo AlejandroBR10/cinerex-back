@@ -13,7 +13,7 @@ import { ROLES } from 'src/auth/constants/roles.constants';
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
-  @Auth(ROLES.ADMIN)
+  //@Auth(ROLES.ADMIN)
   @Post()
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customersService.create(createCustomerDto);

@@ -14,7 +14,6 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsString()
-  @MaxLength(1000)
   movieDescription: string;
 
   @ApiProperty()
