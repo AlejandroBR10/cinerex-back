@@ -29,7 +29,7 @@ export class CreateShowtimeDto {
 
      @ApiProperty()
      @IsOptional()
-    @IsUUID("4")
+    @IsInt()
    movie?: string;
  
     @ApiProperty()

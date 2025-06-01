@@ -14,7 +14,7 @@ async function bootstrap() {
       credentials: true,
     },
   });
-    
+  
 app.use(cookieParser());
   const config = new DocumentBuilder()
   .setTitle('CINEREX API')
