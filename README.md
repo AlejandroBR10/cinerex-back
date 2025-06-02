@@ -1,4 +1,3 @@
-Perfecto, Alejandro. Aquí tienes un `README.md` profesional y completo para tu backend **Cinerex Back**, desarrollado con **NestJS**, **PostgreSQL** y **Docker**.
 
 ---
 
