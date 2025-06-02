@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+
+---
+
+```markdown
+>>>>>>> 22ff57c19599f634d2334325aa8b5860f49e6dcd
 # 🎬 Cinerex Back
 
 Backend oficial del sistema **Cinerex**, una plataforma integral para la gestión de funciones de cine, películas, clientes, empleados y ventas.
@@ -82,7 +89,7 @@ npm run test          # Ejecuta pruebas unitarias
 La API está documentada automáticamente con Swagger en:
 
 ```
-http://localhost:3000/api
+http://localhost:4000/api
 ```
 
 ---
