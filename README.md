@@ -88,7 +88,7 @@ npm run test          # Ejecuta pruebas
 La API se documenta automáticamente en:
 
 ```
-http://localhost:3000/api
+http://localhost:4000/api
 ```
 
 Gracias a Swagger.
