@@ -32,6 +32,6 @@ export class CreateCustomerDto {
      
         @ApiPropertyOptional()
         @IsOptional()
-        @IsObject ()
-        user : User | string
+        @IsString ()
+        user : User | string;
 }

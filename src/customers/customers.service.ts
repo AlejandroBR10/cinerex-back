@@ -40,6 +40,20 @@ export class CustomersService {
     return customer;
   }
 
+  findOneByEmail(email: string) {
+    const customer = this.customerRepository.findOne({
+      where: {
+        customerEmail  :email
+      }, relations : {
+        user: true,
+        tickets : true
+      }
+    });
+    if(!customer) throw new NotFoundException("Cliente no encontrado");
+    return customer;
+  }
+
+
   async update(id: string, updateCustomerDto: UpdateCustomerDto) {
    const customerToUpdate  = await this.customerRepository.preload({
     customerId : id,

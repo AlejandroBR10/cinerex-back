@@ -19,18 +19,23 @@ export class CustomersController {
     return this.customersService.create(createCustomerDto);
   }
 
-  @Auth()
+  @Auth(ROLES.CUSTOMER)
   @Get()
   findAll() {
     return this.customersService.findAll();
   }
 
-  @Auth()
+  @Auth(ROLES.CUSTOMER)
   @Get(':id')
   findOne(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.customersService.findOne(id);
   }
 
+   @Auth(ROLES.CUSTOMER)
+  @Get("email/:email")
+  findOneByEmail(@Param("email") email : string) {
+    return this.customersService.findOneByEmail(email);
+  }
   @Auth()
   @Patch(':id')
   update(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string, @Body() updateCustomerDto: UpdateCustomerDto) {

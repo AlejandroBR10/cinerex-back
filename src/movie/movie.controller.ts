@@ -5,6 +5,7 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { ApiAuth } from 'src/auth/decorators/api.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
+import { ROLES } from 'src/auth/constants/roles.constants';
 
 @ApiAuth()
 @ApiBearerAuth()
@@ -17,12 +18,12 @@ export class MovieController {
   create(@Body() createMovieDto: CreateMovieDto) {
     return this.movieService.create(createMovieDto);
   }
- @Auth()
+ @Auth(ROLES.CUSTOMER)
   @Get()
   findAll() {
     return this.movieService.findAll();
   }
- @Auth()
+ @Auth(ROLES.CUSTOMER)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.movieService.findOne(+id);

@@ -29,7 +29,7 @@ export class Customer {
   @OneToMany(() => Ticket, (ticket) => ticket.customer)
   tickets: Ticket[];
 
-  @OneToOne(() => User)
+ @OneToOne(() => User, { eager: true })
   @JoinColumn({
     name: "userId",
   })
