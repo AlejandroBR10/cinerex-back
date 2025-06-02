@@ -25,6 +25,6 @@ export class Movie {
   @Column({type:"text", nullable: true})
   movieTrailer : string;
 
-  @OneToMany(() => Showtime, showtime => showtime.movie)
+  @OneToMany(() => Showtime, showtime => showtime.movie , { onDelete: "CASCADE" })
   showtimes: Showtime[];
 }

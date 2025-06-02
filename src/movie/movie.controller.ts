@@ -14,7 +14,7 @@ export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Auth()
-  @Post()
+  @Post(ROLES.ADMIN)
   create(@Body() createMovieDto: CreateMovieDto) {
     return this.movieService.create(createMovieDto);
   }

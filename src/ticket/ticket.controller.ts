@@ -5,6 +5,7 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { ApiAuth } from 'src/auth/decorators/api.decorator';
+import { ROLES } from 'src/auth/constants/roles.constants';
 
 
 @ApiAuth()
@@ -12,17 +13,17 @@ import { ApiAuth } from 'src/auth/decorators/api.decorator';
 @Controller('ticket')
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
-  @Auth()
+  @Auth(ROLES.CUSTOMER, ROLES.ADMIN)
   @Post()
   create(@Body() createTicketDto: CreateTicketDto) {
     return this.ticketService.create(createTicketDto);
   }
-  @Auth()
+  @Auth(ROLES.CUSTOMER)
   @Get()
   findAll() {
     return this.ticketService.findAll();
   }
-  @Auth()
+  @Auth(ROLES.CUSTOMER)
   @Get(':id')
   findOne(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.ticketService.findOne(id);

@@ -14,17 +14,17 @@ import { ROLES } from 'src/auth/constants/roles.constants';
 export class ShowtimeController {
   constructor(private readonly showtimeService: ShowtimeService) {}
 
-    @Auth(ROLES.CUSTOMER)
+    @Auth(ROLES.CUSTOMER, ROLES.ADMIN)
   @Post()
   create(@Body() createShowtimeDto: CreateShowtimeDto) {
     return this.showtimeService.create(createShowtimeDto);
   }
-  @Auth()
+  @Auth(ROLES.CUSTOMER, ROLES.ADMIN)
   @Get()
   findAll() {
     return this.showtimeService.findAll();
   }
-  @Auth()
+  @Auth(ROLES.CUSTOMER)
   @Get(':id')
   findOne(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.showtimeService.findOne(id);

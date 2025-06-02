@@ -22,7 +22,7 @@ export class Showtime {
   @Column('text')
   lenguage : string;
 
-   @ManyToOne(() => Movie, movie => movie.showtimes, { eager: true })
+   @ManyToOne(() => Movie, movie => movie.showtimes, { eager: true , onDelete: "CASCADE" })
   @JoinColumn({ name: 'movieId' })
   movie: Movie | string;
 

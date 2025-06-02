@@ -5,6 +5,7 @@ import { UpdateRoomDto } from './dto/update-room.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { ApiAuth } from 'src/auth/decorators/api.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
+import { ROLES } from 'src/auth/constants/roles.constants';
 
 @ApiAuth()
 @ApiBearerAuth()
@@ -12,17 +13,17 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
-   @Auth()
+   @Auth(ROLES.CUSTOMER)
   @Post()
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomService.create(createRoomDto);
   }
- @Auth()
+ @Auth(ROLES.CUSTOMER)
   @Get()
   findAll() {
     return this.roomService.findAll();
   }
- @Auth()
+ @Auth(ROLES.CUSTOMER)
   @Get(':id')
   findOne(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.roomService.findOne(id);
