@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-
----
-
-```markdown
->>>>>>> 22ff57c19599f634d2334325aa8b5860f49e6dcd
 # 🎬 Cinerex Back
 
 Backend oficial del sistema **Cinerex**, una plataforma integral para la gestión de funciones de cine, películas, clientes, empleados y ventas.
