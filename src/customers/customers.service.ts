@@ -71,4 +71,15 @@ export class CustomersService {
     });
     return `Cliente con el id-> #${id} eliminado`;
   }
+
+  async findByUserId(userId: string): Promise<Customer> {
+    const customer = await this.customerRepository.createQueryBuilder('customer')
+      .leftJoinAndSelect('customer.user', 'user')
+      .leftJoinAndSelect('customer.tickets', 'tickets')
+      .where('user.userId = :userId', { userId })
+      .getOne();
+
+    if (!customer) throw new NotFoundException("Cliente no encontrado");
+    return customer;
+  }
 }

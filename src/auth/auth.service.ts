@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginUserDto } from './dto/login-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Customer } from 'src/customers/entities/customer.entity';
 
 @Injectable()
 export class AuthService {
@@ -34,10 +35,10 @@ export class AuthService {
     
     const match = await bcrypt.compare(loginUserDto.userPassword, user.userPassword);
    
-    if(!match)throw new UnauthorizedException("No estas autorizado");
+    if(!match) throw new UnauthorizedException("No estas autorizado");
       const payload = {
+        userId: user.userId, // <-- nueva linea de prueba
         userEmail : user.userEmail,
-        userPassword : user.userPassword,
         userRoles: user.userRoles
     };
     const token = this.jwtService.sign(payload);
@@ -57,4 +58,16 @@ export class AuthService {
     return newUserData;
   }
 
+  async login(user: User, customer: Customer) {
+    const payload = {
+      userId: user.userId, 
+      customerId :customer.customerId, 
+      userEmail: user.userEmail,
+      userRoles: user.userRoles,
+      // Aqui podemos importar otros campos para el customer
+    };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
 }

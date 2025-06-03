@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, BadRequestException } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -6,6 +6,8 @@ import { ApiAuth } from 'src/auth/decorators/api.decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ROLES } from 'src/auth/constants/roles.constants';
+import { Req } from '@nestjs/common';
+
 
 @ApiAuth()
 @ApiBearerAuth()
@@ -24,6 +26,18 @@ export class CustomersController {
   findAll() {
     return this.customersService.findAll();
   }
+
+
+@Auth(ROLES.CUSTOMER)
+@Get('me')
+async getMyCustomer(@Req() req) {
+  const userId = req.user.userId;
+  const customer = await this.customersService.findByUserId(userId);
+  if (!customer) {
+    throw new BadRequestException('No se encontró el customer para este usuario');
+  }
+  return customer;
+}
 
   @Auth(ROLES.CUSTOMER)
   @Get(':id')
