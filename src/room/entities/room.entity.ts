@@ -4,8 +4,8 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Room {
-  @PrimaryGeneratedColumn("uuid")
-  roomId: string;
+  @PrimaryGeneratedColumn()
+  roomId: number;
 
   @Column("text")
   roomName: string;

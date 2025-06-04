@@ -22,7 +22,6 @@ export class CreateMovieDto {
 
  @ApiProperty()
   @IsString()
-  @MaxLength(30)
   movieGenre: string;
 
 @ApiProperty()
