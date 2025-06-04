@@ -4,7 +4,7 @@ import { Showtime } from 'src/showtime/entities/showtime.entity';
 
 export class CreateRoomDto {
    @ApiProperty()
-    @IsString()
+    //@IsString()
     //@IsUUID("4")
     @IsNumber()
     roomId: number;
