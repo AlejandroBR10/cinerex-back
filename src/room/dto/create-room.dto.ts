@@ -6,6 +6,7 @@ export class CreateRoomDto {
    @ApiProperty()
     //@IsString()
     //@IsUUID("4")
+    @IsOptional()
     @IsNumber()
     roomId: number;
   
