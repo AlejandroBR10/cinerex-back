@@ -19,7 +19,7 @@ import { Showtime } from './showtime/entities/showtime.entity';
 
 @Module({
   imports: [
-     ConfigModule.forRoot(),
+     
     TypeOrmModule.forRoot({
         type: 'postgres',
         host: process.env.host,
@@ -27,10 +27,11 @@ import { Showtime } from './showtime/entities/showtime.entity';
         username: 'postgres',
         password: "TheBestPassword",
         database: process.env.name,
-        entities: [User,Movie,Ticket,Room,Customer,Showtime],
+        entities: [],
         autoLoadEntities: true,
         synchronize: true ,
       }),
+      ConfigModule.forRoot(),
    
  AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule, CustomersModule, ReservationModule],
   controllers: [],
