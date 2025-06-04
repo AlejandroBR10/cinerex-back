@@ -13,8 +13,8 @@ import { ROLES } from 'src/auth/constants/roles.constants';
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
-  @Auth()
-  @Post(ROLES.ADMIN)
+  @Auth(ROLES.ADMIN)
+  @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
     return this.movieService.create(createMovieDto);
   }

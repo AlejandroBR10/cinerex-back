@@ -13,6 +13,7 @@ export class ShowtimeService {
   ){}
   create(createShowtimeDto: CreateShowtimeDto) {
     const showTime = this.showtimeRepository.save(createShowtimeDto);
+    
     return showTime;
   }
 

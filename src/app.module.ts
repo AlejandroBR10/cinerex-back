@@ -10,9 +10,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { CustomersModule } from './customers/customers.module';
 import { ReservationModule } from './reservation/reservation.module';
+import { User } from './auth/entities/user.entity';
+import { Movie } from './movie/entities/movie.entity';
+import { Ticket } from './ticket/entities/ticket.entity';
+import { Room } from './room/entities/room.entity';
+import { Customer } from './customers/entities/customer.entity';
+import { Showtime } from './showtime/entities/showtime.entity';
 
 @Module({
   imports: [
+     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
         type: 'postgres',
         host: process.env.host,
@@ -20,11 +27,11 @@ import { ReservationModule } from './reservation/reservation.module';
         username: 'postgres',
         password: "TheBestPassword",
         database: process.env.name,
-        entities: [],
+        entities: [User,Movie,Ticket,Room,Customer,Showtime],
         autoLoadEntities: true,
         synchronize: true ,
       }),
-    ConfigModule.forRoot(),
+   
  AuthModule, MovieModule, ShowtimeModule, SeatModule, TicketModule, RoomModule, CustomersModule, ReservationModule],
   controllers: [],
   providers: [],
