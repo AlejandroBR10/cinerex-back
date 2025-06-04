@@ -15,13 +15,13 @@ import { Req } from '@nestjs/common';
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
-  @Auth(ROLES.ADMIN, ROLES.CUSTOMER)
+  //@Auth(ROLES.ADMIN, ROLES.CUSTOMER)
   @Post()
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customersService.create(createCustomerDto);
   }
 
-  @Auth(ROLES.CUSTOMER)
+  //@Auth(ROLES.CUSTOMER)
   @Get()
   findAll() {
     return this.customersService.findAll();

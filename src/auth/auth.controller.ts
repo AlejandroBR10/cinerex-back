@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, Req, UseGuards, ParseUUIDPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 import { LoginUserDto } from './dto/login-user.dto';
@@ -24,6 +24,13 @@ export class AuthController {
       console.log("Usuario decodificado:",req.user);
       return { token: req.cookies[TOKEN_NAME], user: req.user};
     }
+
+    @Get('email/:email')
+   findOne(@Param('email') email: string) {
+       return this.authService.findOneByEmail(email);
+     }
+
+
 
   @Post()
   singup(@Body() createUserDto: CreateUserDto){

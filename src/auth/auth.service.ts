@@ -24,6 +24,19 @@ export class AuthService {
       return user;
   }
 
+  
+
+
+  findOneByEmail(email: string) {
+    const user = this.userRepository.findOne({
+      where: {
+        userEmail  :email
+      }
+    });
+    if(!user) throw new NotFoundException("Cliente no encontrado");
+    return user;
+  }
+
   async loginUser(loginUserDto : LoginUserDto){
     const user = await this.userRepository.findOne({
       where: {
