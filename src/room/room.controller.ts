@@ -25,17 +25,17 @@ export class RoomController {
   }
  @Auth(ROLES.CUSTOMER)
   @Get(':id')
-  findOne(@Param('id', new ParseUUIDPipe({ version: "4" })) id: string) {
+  findOne(@Param('id') id: number) {
     return this.roomService.findOne(id);
   }
  @Auth()
   @Patch(':id')
-  update(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string, @Body() updateRoomDto: UpdateRoomDto) {
+  update(@Param('id') id: number, @Body() updateRoomDto: UpdateRoomDto) {
     return this.roomService.update(id, updateRoomDto);
   }
  @Auth()
   @Delete(':id')
-  remove(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
+  remove(@Param('id') id: number) {
     return this.roomService.remove(id);
   }
 }

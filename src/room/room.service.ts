@@ -24,7 +24,7 @@ export class RoomService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     const room = this.roomRepository.findOne({
       where : {
       roomId: id,
@@ -36,7 +36,7 @@ export class RoomService {
     return room;
   }
 
-  async update(id: string, updateRoomDto: UpdateRoomDto) {
+  async update(id: number, updateRoomDto: UpdateRoomDto) {
     const roomToUpdate = await this.roomRepository.preload({
       roomId: id,
       ...updateRoomDto
@@ -46,7 +46,7 @@ export class RoomService {
     return roomToUpdate;
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
   this.findOne(id);
   this.roomRepository.delete({
     roomId : id
