@@ -24,11 +24,11 @@ export class Showtime {
 
    @ManyToOne(() => Movie, movie => movie.showtimes, { eager: true }  )
   @JoinColumn({ name: 'movieId' })
-  movie: Movie | string;
+  movie: Movie | number;
 
   @ManyToOne(() => Room, room => room.showtimes, { eager: true })
   @JoinColumn({ name: 'roomId' })
-  room:   Room | string;
+  room:   Room | number;
 
   @OneToMany(() => Ticket, ticket => ticket.showtime)
   tickets: Ticket[];

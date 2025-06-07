@@ -26,6 +26,7 @@ export class ShowtimeController {
   }
   @Auth(ROLES.CUSTOMER)
   @Get(':id')
+  //findOne(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
   findOne(@Param('id',new ParseUUIDPipe({ version: "4" })) id: string) {
     return this.showtimeService.findOne(id);
   }

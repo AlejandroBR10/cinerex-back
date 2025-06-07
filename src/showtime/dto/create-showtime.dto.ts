@@ -29,12 +29,12 @@ export class CreateShowtimeDto {
 
      @ApiProperty()
      @IsOptional()
-    @IsInt()
-   movie?: string;
+    @IsNumber()
+   movie?: number;
  
     @ApiProperty()
      @IsOptional()
-    @IsUUID("4")
-   room?:  string;
+    @IsNumber()
+   room?:  number;
  
 }
